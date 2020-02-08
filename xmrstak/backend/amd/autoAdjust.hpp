@@ -37,10 +37,10 @@ class autoAdjust
 	}
 
 	/** print the adjusted values if needed
-	 *
-	 * Routine exit the application and print the adjusted values if needed else
-	 * nothing is happened.
-	 */
+     *
+     * Routine exit the application and print the adjusted values if needed else
+     * nothing is happened.
+     */
 	bool printConfig()
 	{
 		int platformIndex = getAMDPlatformIdx();
@@ -91,21 +91,21 @@ class autoAdjust
 		{
 			std::string enabledGpus = params::inst().amdGpus;
 			bool enabled = true;
-			if (!enabledGpus.empty())
+			if(!enabledGpus.empty())
 			{
 				enabled = false;
 				std::stringstream ss(enabledGpus);
 
 				int i = -1;
-				while (ss >> i)
+				while(ss >> i)
 				{
-					if (i == ctx.deviceIdx)
+					if(i == ctx.deviceIdx)
 					{
 						enabled = true;
 						break;
 					}
 
-					while (ss.peek() == ',' || ss.peek() == ' ')
+					while(ss.peek() == ',' || ss.peek() == ' ')
 						ss.ignore();
 				}
 			}
@@ -136,8 +136,8 @@ class autoAdjust
 				ctx.name.compare("gfx1012") == 0;
 
 			/* 1000 is a magic selected limit, the reason is that more than 2GiB memory
-			 * sowing down the memory performance because of TLB cache misses
-			 */
+             * sowing down the memory performance because of TLB cache misses
+             */
 			size_t maxThreads = 1000u;
 			if(
 				ctx.name.compare("gfx901") == 0 ||
@@ -153,9 +153,9 @@ class autoAdjust
 				ctx.name.compare("Fiji") == 0)
 			{
 				/* Increase the number of threads for AMD VEGA gpus.
-				 * Limit the number of threads based on the issue: https://github.com/fireice-uk/xmr-stak/issues/5#issuecomment-339425089
-				 * to avoid out of memory errors
-				 */
+                 * Limit the number of threads based on the issue: https://github.com/fireice-uk/xmr-stak/issues/5#issuecomment-339425089
+                 * to avoid out of memory errors
+                 */
 				maxThreads = 2024u;
 
 				if(useCryptonight_gpu)
@@ -232,7 +232,7 @@ class autoAdjust
 			// map intensity to a multiple of the compute unit count, default_workSize is the number of threads per work group
 			size_t intensity = (possibleIntensity / (default_workSize * ctx.computeUnits)) * ctx.computeUnits * default_workSize;
 
-			size_t computeUnitUtilization = ((possibleIntensity * 100)  / (default_workSize * ctx.computeUnits)) % 100;
+			size_t computeUnitUtilization = ((possibleIntensity * 100) / (default_workSize * ctx.computeUnits)) % 100;
 			// in the case we use two threads per gpu or if we can utilize over 75% of the compute units
 			// we can be relax and need no multiple of the number of compute units
 			if(numThreads == 2 || computeUnitUtilization >= 75)
@@ -246,7 +246,7 @@ class autoAdjust
 			}
 			if(intensity != 0)
 			{
-				if (!enabled)
+				if(!enabled)
 					conf += "/* Disabled\n";
 
 				for(uint32_t thd = 0; thd < numThreads; ++thd)
@@ -262,7 +262,7 @@ class autoAdjust
 							"  },\n";
 				}
 
-				if (!enabled)
+				if(!enabled)
 					conf += "*/\n";
 			}
 			else

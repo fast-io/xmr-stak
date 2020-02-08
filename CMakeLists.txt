@@ -83,10 +83,10 @@ if(CUDA_ENABLE)
     if(CUDA_FOUND)
         # required for monero's cryptonight_r
         # libcuda
-        find_library(CUDA_LIB 
+        find_library(CUDA_LIB
         NAMES
-            libcuda 
-            cuda 
+            libcuda
+            cuda
             cuda.lib
         HINTS
             ${CUDA_TOOLKIT_ROOT_DIR}
@@ -102,16 +102,16 @@ if(CUDA_ENABLE)
             lib)
 
         #nvrtc
-        find_library(CUDA_NVRTC_LIB 
+        find_library(CUDA_NVRTC_LIB
         NAMES
-            libnvrtc 
-            nvrtc 
+            libnvrtc
+            nvrtc
             nvrtc.lib
-        HINTS 
-            ${CUDA_TOOLKIT_ROOT_DIR} 
+        HINTS
+            ${CUDA_TOOLKIT_ROOT_DIR}
             ${LIBNVRTC_LIBRARY_DIR}
             ${CUDA_TOOLKIT_ROOT_DIR}
-            /usr 
+            /usr
             /usr/local/cuda
         PATH_SUFFIXES
             lib64
@@ -610,7 +610,7 @@ if(CUDA_FOUND)
     else()
         set(CUDA_LIBRARIES ${CUDA_LIBRARIES} ${CUDA_NVRTC_LIB})
     endif()
-    
+
     target_link_libraries(xmrstak_cuda_backend ${CUDA_LIBRARIES})
     target_link_libraries(xmrstak_cuda_backend xmr-stak-backend xmr-stak-asm)
 endif()
