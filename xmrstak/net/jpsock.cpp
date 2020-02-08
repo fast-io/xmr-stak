@@ -75,8 +75,8 @@ struct jpsock::opaque_private
 	Value oCallValue;
 
 	MemoryPoolAllocator<> callAllocator;
-	MemoryPoolAllocator<> recvAllocator;
-	MemoryPoolAllocator<> parseAllocator;
+MemoryPoolAllocator<> recvAllocator;
+MemoryPoolAllocator<> parseAllocator;
 	MemDocument jsonDoc;
 	call_rsp oCallRsp;
 
