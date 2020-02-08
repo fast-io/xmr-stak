@@ -36,10 +36,10 @@ void globalStates::consume_work(miner_work& threadWork, uint64_t& currentJobId)
 {
 	jobLock.ReadLock();
 
-	threadWork = oGlobalWork;
+	threadWork =oGlobalWork;
 	currentJobId = iGlobalJobNo.load(std::memory_order_relaxed);
 
-	jobLock.UnLock();
+	jobLock.UnLock()   ;
 }
 
 void globalStates::switch_work(miner_work&& pWork, pool_data& dat)
